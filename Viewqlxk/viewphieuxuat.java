@@ -27,14 +27,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
 
 public class viewphieuxuat extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField text_ma;
-	private JTextField text_ten;
-	private JTextField text_loai;
-	private JTextField text_hangsx;
 	private JTextField text_soluong;
 	public static void main(String[] args) {
 		User nguoidung=new User("ADMIN1", "Lam Tuan Kiet","Nam","","","","","admin","admin","ADMIN");
@@ -94,38 +93,44 @@ public class viewphieuxuat extends JFrame {
 		lblNewLabel_1_4.setBounds(31, 342, 92, 25);
 		contentPane.add(lblNewLabel_1_4);
 		
-		text_ma = new JTextField();
-		text_ma.setBounds(133, 102, 165, 31);
-		contentPane.add(text_ma);
-		text_ma.setColumns(10);
-		
-		text_ten = new JTextField();
-		text_ten.setColumns(10);
-		text_ten.setBounds(133, 153, 220, 31);
-		contentPane.add(text_ten);
-		
-		text_loai = new JTextField();
-		text_loai.setColumns(10);
-		text_loai.setBounds(133, 210, 165, 31);
-		contentPane.add(text_loai);
-		
-		text_hangsx = new JTextField();
-		text_hangsx.setColumns(10);
-		text_hangsx.setBounds(133, 271, 165, 31);
-		contentPane.add(text_hangsx);
-		
 		text_soluong = new JTextField();
 		text_soluong.setColumns(10);
 		text_soluong.setBounds(133, 336, 92, 31);
 		contentPane.add(text_soluong);
+		String[] dsmasp=chucnang.masp_xuat();
+		String[] dstensp=chucnang.tensp_xuat();
+		String[] dsloai=chucnang.loaisp_xuat();
+		String[] dshang=chucnang.hangsx_xuat();
+		JComboBox box_ma = new JComboBox();
+		box_ma.setModel(new DefaultComboBoxModel(dsmasp));
+		box_ma.setMaximumRowCount(1000);
+		box_ma.setBounds(133, 107, 130, 19);
+		contentPane.add(box_ma);
+		
+		JComboBox box_ten = new JComboBox();
+		box_ten.setModel(new DefaultComboBoxModel(dstensp));
+		box_ten.setMaximumRowCount(100000);
+		box_ten.setBounds(133, 157, 148, 21);
+		contentPane.add(box_ten);
+		
+		JComboBox box_loai = new JComboBox();
+		
+		box_loai.setModel(new DefaultComboBoxModel(dsloai));
+		box_loai.setBounds(133, 214, 130, 21);
+		contentPane.add(box_loai);
+		
+		JComboBox box_hang = new JComboBox();
+		box_hang.setModel(new DefaultComboBoxModel(dshang));
+		box_hang.setBounds(133, 281, 148, 21);
+		contentPane.add(box_hang);
 		
 		JButton but_xuat = new JButton("Xuất hàng");
 		but_xuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String masp=text_ma.getText();
-				String tensp=text_ten.getText();
-				String loai=text_loai.getText();
-				String hangsx=text_hangsx.getText();
+				String masp=box_ma.getSelectedItem().toString();
+				String tensp=box_ten.getSelectedItem().toString();
+				String loai=box_loai.getSelectedItem().toString();
+				String hangsx=box_hang.getSelectedItem().toString();
 				int soluong=Integer.parseUnsignedInt(text_soluong.getText());
 				//tao ra san pham
 				bongden_chung sp=new bongden_chung(masp, tensp, loai, hangsx, soluong);
@@ -144,10 +149,14 @@ public class viewphieuxuat extends JFrame {
 					JOptionPane.showMessageDialog(null,"Thiếu dữ liệu!!!!!!");
 				
 				else {
-					if(chucnang.xuatsanpham(sp, lichsusp))
+					if(chucnang.xuatsanpham(sp, lichsusp)==1)
 						JOptionPane.showMessageDialog(null,"Xuat hàng thành công.");
+					else 
+						if(chucnang.xuatsanpham(sp, lichsusp)==2)
+							JOptionPane.showMessageDialog(null,"Số lượng trong kho hàng ko đủ.");
+					
 					else
-						JOptionPane.showMessageDialog(null,"That bai.");
+						JOptionPane.showMessageDialog(null,"Sản phẩm ko tồn tại.");
 				}
 				closeviewphieuxuat();
 			}
@@ -172,6 +181,10 @@ public class viewphieuxuat extends JFrame {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
+		
+		
+		
+		
 	}
 	public void showviewphieuxuat() {
 		this.setVisible(true);
@@ -180,3 +193,4 @@ public class viewphieuxuat extends JFrame {
 		this.setVisible(false);
 	}
 }
+
