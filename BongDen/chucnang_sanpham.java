@@ -21,6 +21,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 import DAO.UserDAO;
 import DAO.bongdenDAO;
 import DAO.bongden_nhapDAO;
@@ -54,7 +56,7 @@ public class chucnang_sanpham {
 		listBongden_nhapDAO.insert(lichsusp);
 		return 2;
 	}
-	public boolean xuatsanpham(bongden_chung sp,bongden_nhap lichsuxuat) {
+	public int xuatsanpham(bongden_chung sp,bongden_nhap lichsuxuat) {
 		bongdenDAO listbBongdenDAO=new bongdenDAO();
 		bongden_xuatDAO listBongden_xuatDAO=new bongden_xuatDAO();
 		ArrayList<bongden_chung> list=listbBongdenDAO.selecAll();
@@ -67,17 +69,18 @@ public class chucnang_sanpham {
 			if(sp.getMa().equalsIgnoreCase(list.get(i).getMa())&&
 					sp.getTen().equalsIgnoreCase(list.get(i).getTen())&&
 					sp.getLoai().equalsIgnoreCase(list.get(i).getLoai())&&
-					sp.getHang().equalsIgnoreCase(list.get(i).getHang())&&
-					sp.getSoluong()<=list.get(i).getSoluong())
+					sp.getHang().equalsIgnoreCase(list.get(i).getHang()))
+					
 				 {	
+				if(sp.getSoluong()<=list.get(i).getSoluong())return 2;
 				bongden_chung sptam=list.get(i);
 				sptam.setSoluong(list.get(i).getSoluong()-sp.getSoluong());
 				listbBongdenDAO.update(sptam);
 				listBongden_xuatDAO.insert(lichsuxuat);
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		return 0;
 	}
 	public void hienthisanpham(JTable table_1) {
 		bongdenDAO chucnang=new bongdenDAO();
@@ -784,7 +787,7 @@ public class chucnang_sanpham {
 				in.close();
 				ArrayList<bongden_chung> dsspxuatloi=new ArrayList<>();
 				for(int i=0;i<dsspxuat.size();i++)
-					if(xuatsanpham(dsspxuat.get(i),dslichsuspxuat.get(i))==false)
+					if(xuatsanpham(dsspxuat.get(i),dslichsuspxuat.get(i))==0)
 					{
 						dsspxuatloi.add(dsspxuat.get(i));
 						kq=2;
@@ -1081,5 +1084,49 @@ public class chucnang_sanpham {
 			}
 		}
 		return kq;
+	}
+	public String[] masp_xuat() {
+		bongdenDAO chucnangsp=new bongdenDAO();
+		ArrayList<bongden_chung> ds=chucnangsp.selecAll();
+		String[] list=new String[ds.size()];
+		for(int i=0;i<ds.size();i++)
+			list[i]=ds.get(i).getMa();
+		return list;
+	}
+	public String[] tensp_xuat() {
+		bongdenDAO chucnangsp=new bongdenDAO();
+		ArrayList<bongden_chung> ds=chucnangsp.selecAll();
+		String[] list=new String[ds.size()];
+		for(int i=0;i<ds.size();i++)
+			list[i]=ds.get(i).getTen();
+		return list;
+	}
+	public String[] loaisp_xuat() {
+		bongdenDAO chucnangsp=new bongdenDAO();
+		ArrayList<bongden_chung> ds=chucnangsp.selecAll();
+		ArrayList<String> dstam=new ArrayList<>();
+		for(int i=0;i<ds.size();i++)
+			if(dstam.contains(ds.get(i).getLoai())==false)
+				dstam.add(ds.get(i).getLoai());
+		
+		
+		String[] list=new String[dstam.size()];
+		for(int i=0;i<dstam.size();i++)
+			list[i]=dstam.get(i);
+		return list;
+	}
+	public String[] hangsx_xuat() {
+		bongdenDAO chucnangsp=new bongdenDAO();
+		ArrayList<bongden_chung> ds=chucnangsp.selecAll();
+		
+		
+		ArrayList<String> dstam=new ArrayList<>();
+		for(int i=0;i<ds.size();i++)
+			if(dstam.contains(ds.get(i).getHang())==false)
+				dstam.add(ds.get(i).getHang());
+		String[] list=new String[dstam.size()];
+		for(int i=0;i<dstam.size();i++)
+			list[i]=dstam.get(i);
+		return list;
 	}
 }
