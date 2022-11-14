@@ -174,11 +174,11 @@ public class Viewlichsunhaphang extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"S\u1ED1 th\u1EE9 t\u1EF1", "M\u00E3 phi\u1EBFu", "Ng\u00E0y nh\u1EADp"
+				"S\u1ED1 th\u1EE9 t\u1EF1", "M\u00E3 phi\u1EBFu", "Ng\u01B0\u1EDDi nh\u1EADp", "Ng\u00E0y nh\u1EADp"
 			}
 		));
 		table.getColumnModel().getColumn(0).setPreferredWidth(66);
-		table.getColumnModel().getColumn(2).setPreferredWidth(169);
+		table.getColumnModel().getColumn(3).setPreferredWidth(169);
 		
 
 		JMenuBar menuBar = new JMenuBar();
