@@ -427,7 +427,12 @@ public class viewqlxuatkho extends JFrame {
 		btnXutBngFile.setIcon(new ImageIcon(viewqlxuatkho.class.getResource("/Hinhanh/export_excel_icon(2).png")));
 		btnXutBngFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chucnang.outsp_byexcel(nguoidung.getManv());
+				if(chucnang.outsp_byexcel(nguoidung.getManv())==2)
+					JOptionPane.showMessageDialog(null,"Có sản phẩm bị lõi");
+				else {
+					JOptionPane.showMessageDialog(null, "Thanh cong");
+				}
+				
 			}
 		});
 		btnXutBngFile.setFont(new Font("Tahoma", Font.BOLD, 14));
