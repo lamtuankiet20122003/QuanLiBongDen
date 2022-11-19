@@ -196,6 +196,9 @@ public class viewadminquanlikhohang extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(chucnang.outsp_byexcel(nguoidung.getManv())==2)
 					JOptionPane.showMessageDialog(null,"Có sản phẩm bị lõi");
+				else {
+					JOptionPane.showMessageDialog(null, "Thanh cong");
+				}
 					
 			}
 		});
