@@ -72,7 +72,8 @@ public class chucnang_sanpham {
 					sp.getHang().equalsIgnoreCase(list.get(i).getHang()))
 					
 				 {	
-				if(sp.getSoluong()<=list.get(i).getSoluong())return 2;
+				//so luong san pham can xuat lon hon so luong san pham hien co
+				if(sp.getSoluong()>list.get(i).getSoluong())return 2;
 				bongden_chung sptam=list.get(i);
 				sptam.setSoluong(list.get(i).getSoluong()-sp.getSoluong());
 				listbBongdenDAO.update(sptam);
@@ -787,7 +788,7 @@ public class chucnang_sanpham {
 				in.close();
 				ArrayList<bongden_chung> dsspxuatloi=new ArrayList<>();
 				for(int i=0;i<dsspxuat.size();i++)
-					if(xuatsanpham(dsspxuat.get(i),dslichsuspxuat.get(i))==0)
+					if(xuatsanpham(dsspxuat.get(i),dslichsuspxuat.get(i))==0||xuatsanpham(dsspxuat.get(i),dslichsuspxuat.get(i))==2)
 					{
 						dsspxuatloi.add(dsspxuat.get(i));
 						kq=2;
