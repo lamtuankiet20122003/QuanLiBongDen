@@ -103,8 +103,8 @@ public class viewqlxuatkho extends JFrame {
 			}
 		});
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Cập nhật thông tin");
-		mntmNewMenuItem_3.setIcon(new ImageIcon(viewqlxuatkho.class.getResource("/Hinhanh/update_icon.png")));
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Thông tin cá nhân");
+		mntmNewMenuItem_3.setIcon(new ImageIcon(viewqlxuatkho.class.getResource("/Hinhanh/user-info-icon.png")));
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				viewthongtin viewthongtin=new viewthongtin(nguoidung);
