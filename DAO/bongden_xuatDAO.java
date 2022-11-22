@@ -20,7 +20,7 @@ public class bongden_xuatDAO implements DAOinterface<bongden_nhap> {
 			//b2:tao doi tuong statement
 			Statement st=con.createStatement();
 			//b3:thuc thi cau lenh sql
-			String sql="insert into phieuxuatsanpham2(maphieu,manv,mahang,tenhang,loai,hangsx,soluong,ngayxuat)"+
+			String sql="insert into phieuxuatsanpham2(maphieu,manvql,mahang,tenhang,loai,hang,soluong,ngayxuat)"+
 						" values('"+t.getMaphieu()+"','"+t.getManvql()+"','"+t.getMa()+"','"+t.getTen()+"','"+t.getLoai()+"','"
 					+t.getHang()+"',"+t.getSoluong()+",'"+t.getCurren()+"')";
 			this.check += st.executeUpdate(sql);
@@ -114,11 +114,11 @@ public class bongden_xuatDAO implements DAOinterface<bongden_nhap> {
 			// Bước 4:
 			while(rs.next()) {
 				String maphieu=rs.getString("maphieu");
-				String manvql = rs.getString("manv");
+				String manvql = rs.getString("manvql");
 				String mahang = rs.getString("mahang");
 				String tenhang = rs.getString("tenhang");
 				String loai = rs.getString("loai");
-				String hang = rs.getString("hangsx");
+				String hang = rs.getString("hang");
 				int soluong = rs.getInt("soluong");	
 				String ngaynhap = rs.getString("ngayxuat");
 				bongden_nhap sp=new bongden_nhap(maphieu,manvql,mahang, tenhang, loai, hang, soluong,ngaynhap);
