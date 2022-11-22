@@ -21,7 +21,7 @@ public class bongden_nhapDAO implements DAOinterface<bongden_nhap> {
 				//b2:tao doi tuong statement
 				Statement st=con.createStatement();
 				//b3:thuc thi cau lenh sql
-				String sql="insert into phieunhapsanpham2(maphieu,manv,mahang,tenhang,loai,hangsx,soluong,ngaynhap)"+
+				String sql="insert into phieunhapsanpham2(maphieu,manvql,mahang,tenhang,loai,hang,soluong,ngaynhap)"+
 							" values('"+t.getMaphieu()+"','"+t.getManvql()+"','"+t.getMa()+"','"+t.getTen()+"','"+t.getLoai()+"','"
 						+t.getHang()+"',"+t.getSoluong()+",'"+t.getCurren()+"')";
 				this.check += st.executeUpdate(sql);
@@ -48,11 +48,11 @@ public class bongden_nhapDAO implements DAOinterface<bongden_nhap> {
 			
 			String sql = "UPDATE phieunhapsanpham2 "+
 						 " SET " +
-						 " manv='"+ t.getManvql()+"'"+
+						 " manvql='"+ t.getManvql()+"'"+
 						 ", mahang='"+ t.getMa()+"'"+
 						 ", tenhang='"+ t.getTen()+"'"+
 						 ", loai='"+ t.getLoai()+"'"+
-						 ",hangsx='"+ t.getHang()+"'"+
+						 ",hang='"+ t.getHang()+"'"+
 						 ",soluong="+ t.getSoluong()+
 						 ",ngaynhap='"+ t.getCurren()+"'"+
 						 " WHERE maphieu='"+t.getMaphieu()+"\'";
@@ -114,11 +114,11 @@ public class bongden_nhapDAO implements DAOinterface<bongden_nhap> {
 			// Bước 4:
 			while(rs.next()) {
 				String maphieu=rs.getString("maphieu");
-				String manvql = rs.getString("manv");
+				String manvql = rs.getString("manvql");
 				String mahang = rs.getString("mahang");
 				String tenhang = rs.getString("tenhang");
 				String loai = rs.getString("loai");
-				String hang = rs.getString("hangsx");
+				String hang = rs.getString("hang");
 				int soluong = rs.getInt("soluong");	
 				String ngaynhap = rs.getString("ngaynhap");
 				bongden_nhap sp=new bongden_nhap(maphieu,manvql,mahang, tenhang, loai, hang, soluong,ngaynhap);
